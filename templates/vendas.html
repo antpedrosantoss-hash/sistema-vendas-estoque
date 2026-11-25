@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block content %}<h1>Vendas</h1>
+<div class="panel"><h2>Registrar venda</h2>
+{% if clientes and produtos %}<form method="post">
+<label class="field">Cliente<select name="cliente_id" required>{% for c in clientes %}<option value="{{c.id}}">{{c.nome}}</option>{% endfor %}</select></label>
+<div id="itens"><div class="row item">
+<label class="field">Produto<select name="produto_id">{% for p in produtos %}<option value="{{p.id}}">{{p.nome}} — R$ {{'%.2f'|format(p.preco)}} (estoque: {{p.estoque}})</option>{% endfor %}</select></label>
+<label class="field">Quantidade<input name="quantidade" type="number" min="1" value="1" required></label></div></div>
+<p><button type="button" class="secondary" onclick="adicionar()">Adicionar outro produto</button> <button>Finalizar venda</button></p>
+</form>{% else %}<p>Cadastre pelo menos um cliente e um produto com estoque para realizar vendas.</p>{% endif %}
+</div>
+<div class="panel"><h2>Histórico</h2><table><tr><th>Nº</th><th>Cliente</th><th>Data</th><th>Total</th><th></th></tr>
+{% for v in vendas %}<tr><td>{{v.id}}</td><td>{{v.cliente}}</td><td>{{v.data_venda.strftime('%d/%m/%Y %H:%M')}}</td><td>R$ {{'%.2f'|format(v.total)}}</td><td><a href="/vendas/{{v.id}}">Detalhes</a></td></tr>
+{% else %}<tr><td colspan="5">Nenhuma venda.</td></tr>{% endfor %}</table></div>
+<script>
+function adicionar(){
+ const original=document.querySelector('.item');
+ const clone=original.cloneNode(true);
+ clone.querySelector('input').value=1;
+ document.getElementById('itens').appendChild(clone);
+}
+</script>{% endblock %}

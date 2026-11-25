@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block content %}<h1>Produtos</h1>
+<div class="panel"><h2>Novo produto</h2><form method="post" class="row">
+<label class="field">Nome<input name="nome" required></label>
+<label class="field">Preço (R$)<input name="preco" type="number" min="0" step=".01" required></label>
+<label class="field">Estoque inicial<input name="estoque" type="number" min="0" step="1" required></label>
+<button>Cadastrar</button></form></div>
+<div class="panel"><h2>Produtos cadastrados</h2><table><tr><th>ID</th><th>Nome</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr>
+{% for p in produtos %}<tr><form method="post" action="/produtos/{{p.id}}/editar">
+<td>{{p.id}}</td><td><input name="nome" value="{{p.nome}}" required></td>
+<td><input name="preco" type="number" step=".01" min="0" value="{{p.preco}}" required></td>
+<td><input name="estoque" type="number" min="0" value="{{p.estoque}}" required></td>
+<td><button>Salvar</button></form>
+<form class="inline" method="post" action="/produtos/{{p.id}}/excluir"><button class="danger">Excluir</button></form></td></tr>
+{% else %}<tr><td colspan="5">Nenhum produto.</td></tr>{% endfor %}</table></div>{% endblock %}

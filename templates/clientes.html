@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}<h1>Clientes</h1>
+<div class="panel"><h2>Novo cliente</h2><form method="post" class="row">
+<label class="field">Nome<input name="nome" required></label><label class="field">E-mail<input name="email" type="email"></label><button>Cadastrar</button></form></div>
+<div class="panel"><h2>Clientes cadastrados</h2><table><tr><th>ID</th><th>Nome</th><th>E-mail</th><th>Ações</th></tr>
+{% for c in clientes %}<tr><form method="post" action="/clientes/{{c.id}}/editar"><td>{{c.id}}</td>
+<td><input name="nome" value="{{c.nome}}" required></td><td><input name="email" type="email" value="{{c.email or ''}}"></td>
+<td><button>Salvar</button></form><form class="inline" method="post" action="/clientes/{{c.id}}/excluir"><button class="danger">Excluir</button></form></td></tr>
+{% else %}<tr><td colspan="4">Nenhum cliente.</td></tr>{% endfor %}</table></div>{% endblock %}

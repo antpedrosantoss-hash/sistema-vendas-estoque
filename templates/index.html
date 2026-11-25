@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}
+<h1>Painel geral</h1><p class="muted">Resumo do sistema de vendas e controle de estoque.</p>
+<div class="cards">
+<div class="card">Produtos cadastrados<div class="number">{{ produtos }}</div></div>
+<div class="card">Clientes cadastrados<div class="number">{{ clientes }}</div></div>
+<div class="card">Vendas realizadas<div class="number">{{ vendas }}</div></div>
+</div>
+<div class="panel"><h2>Vendas recentes</h2>
+<table><tr><th>Nº</th><th>Cliente</th><th>Data</th><th>Total</th></tr>
+{% for v in ultimas %}<tr><td><a href="/vendas/{{v.id}}">#{{v.id}}</a></td><td>{{v.cliente}}</td><td>{{v.data_venda.strftime('%d/%m/%Y %H:%M')}}</td><td>R$ {{'%.2f'|format(v.total)}}</td></tr>
+{% else %}<tr><td colspan="4">Nenhuma venda registrada.</td></tr>{% endfor %}</table></div>
+{% endblock %}

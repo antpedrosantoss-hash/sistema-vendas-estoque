@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Vendas & Estoque{% endblock %}</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f9;color:#182230;font:15px Arial,sans-serif}
+header{background:#14213d;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+header strong{font-size:20px}nav a{color:white;text-decoration:none;margin-right:18px}
+main{max-width:1100px;margin:28px auto;padding:0 18px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.card,.panel{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 10px #14213d12;margin-bottom:18px}
+.number{font-size:30px;font-weight:bold;margin-top:8px}.muted{color:#667085}
+input,select{padding:10px;border:1px solid #cbd5e1;border-radius:7px;margin:4px 0;max-width:100%}
+button,.btn{background:#2457c5;color:white;border:0;border-radius:7px;padding:10px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+.danger{background:#b42318}.secondary{background:#475467}table{width:100%;border-collapse:collapse;background:white}
+th,td{text-align:left;padding:11px;border-bottom:1px solid #eaecf0}th{background:#f8fafc}
+form.inline{display:inline}.flash{padding:12px;border-radius:8px;margin-bottom:12px;background:#e8f5e9}
+.flash.erro{background:#fee4e2}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:end}.field{display:flex;flex-direction:column;min-width:180px}
+@media(max-width:650px){table{font-size:13px}th,td{padding:7px}nav a{margin-right:8px}}
+</style></head><body>
+<header><strong>Vendas & Estoque</strong><nav>
+<a href="/">Início</a><a href="/produtos">Produtos</a><a href="/clientes">Clientes</a><a href="/vendas">Vendas</a>
+</nav></header><main>
+{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}
+<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+{% block content %}{% endblock %}</main></body></html>
